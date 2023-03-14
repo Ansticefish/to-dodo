@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/works">Works</router-link>
-    </nav>
     <div @click="switchMode">Switcher</div>
     <router-view/>
   </div>
@@ -66,8 +62,9 @@ table {
 	border-spacing: 0;
 }
 
-html {
-  background: var(--background-color);
+html, body {
+  background: var(--background);
+  color: var(--main-color);
 }
 
 
