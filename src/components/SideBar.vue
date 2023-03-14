@@ -42,8 +42,10 @@ export default {
     panelClicked(route) {
       if (!route) {
         this.switchMode()
+        this.$emit('switch')
       } else {
         this.$router.push(route)
+        this.showPanel = false
       }
     },
     switchMode() {
@@ -63,8 +65,8 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   @include size (10vw, fit-content);
-  max-width: 130px;
-  @include position (fixed, bottom, 15px, right, 25px);
+  max-width: 100px;
+  @include position (fixed, bottom, 10px, right, 25px);
   color: var(--sidebar-color);
   .panel {
     position: relative;

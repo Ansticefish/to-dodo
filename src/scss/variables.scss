@@ -12,6 +12,14 @@ $transition-time: 0.6s;
 }
 
 
+@mixin flex ($direction: row, $justify: flex-start, $align: stretch ) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+
 @mixin flex-center {
   display: flex;
   align-items: center;

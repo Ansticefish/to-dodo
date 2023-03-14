@@ -1,8 +1,7 @@
 <template lang="pug">
-div#app
-  div(@click="switchMode") Switcher 
-  router-view
-  Sidebar
+div#app 
+  router-view(:switchTime="switchTime")
+  Sidebar(@switch="passSwitch")
 </template>
 
 <script>
@@ -13,17 +12,16 @@ export default {
   components: {
     Sidebar
   },
-  methods: {
-    switchMode () {
-      console.log(this.$theme)
-      if (this.$theme === 'light') {
-        this.$theme = 'dark'
-      } else {
-        this.$theme = 'light'
-      }
-      document.documentElement.dataset.theme = this.$theme
-    }
-  }
+	data () {
+		return {
+			switchTime: 0
+		}
+	},
+	methods: {
+		passSwitch () {
+			this.switchTime++
+		}
+	}
 }
 
 </script>
