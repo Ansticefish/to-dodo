@@ -1,13 +1,16 @@
 <template lang="pug">
 div.sidebar 
-  div.panel
+  div.panel(v-if="showPanel")
     div.link(
       v-for="(item, index) in sidebarList"
       :key="index"
       :class="item.class"
       @click="panelClicked(item.route)") {{ item.name }}
   div.btn 
-    img(src="@/assets/logo-sidebar.png")
+    img(
+      src="@/assets/logo-sidebar.png"
+      :class="{'clicked': showPanel}" 
+      @click="()=> this.showPanel = !this.showPanel")
 </template>
 
 <script>
@@ -31,7 +34,8 @@ export default {
           class: 'night',
           route: ''
         }
-      ]
+      ],
+      showPanel: false
     }
   },
   methods: {
@@ -60,7 +64,7 @@ export default {
 .sidebar {
   @include size (10vw, fit-content);
   max-width: 130px;
-  @include position (fixed, bottom, 15px, right, 15px);
+  @include position (fixed, bottom, 15px, right, 25px);
   color: var(--sidebar-color);
   .panel {
     position: relative;
@@ -82,11 +86,7 @@ export default {
       margin: 25% auto;
       padding: 5px;
       border-bottom: 1px solid var(--sidebar-color);
-      cursor: pointer;
-      transition: opacity $transition-time; 
-      &:hover {
-        opacity: 0.6;
-      }
+      @include divBtn;
     }
   }
   .btn {
@@ -98,6 +98,10 @@ export default {
     border: 8px solid var(--logo-border);
     img {
       @include size (100%, 100%);
+      @include divBtn;
+      &:hover, &.clicked {
+        transform: rotate(-360deg);
+      }
     }
   }
 }
