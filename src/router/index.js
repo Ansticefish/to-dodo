@@ -14,6 +14,11 @@ const routes = [
     path: '/works',
     name: 'works',
     component: () => import('../views/WorksPage.vue')
+  },
+  {
+    path: '/works/:day',
+    name: 'day',
+    component: () => import('../views/WorksDayPage.vue')
   }
 ]
 
