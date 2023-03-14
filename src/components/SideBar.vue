@@ -76,7 +76,7 @@ export default {
     box-sizing: border-box;
     &::before {
       content: '';
-      @include position(absolute, top, -20%, left, 0);
+      @include position(absolute, top, -22%, left, 0);
       @include circle(100%);
       background: var(--sidebar-bg);
       z-index: -1;
