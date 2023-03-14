@@ -1,13 +1,18 @@
-<template>
-  <div id="app">
-    <div @click="switchMode">Switcher</div>
-    <router-view/>
-  </div>
+<template lang="pug">
+div#app
+  div(@click="switchMode") Switcher 
+  router-view
+  Sidebar
 </template>
 
 <script>
+import Sidebar from '../src/components/SideBar.vue'
+
 export default {
   name: 'App',
+  components: {
+    Sidebar
+  },
   methods: {
     switchMode () {
       console.log(this.$theme)

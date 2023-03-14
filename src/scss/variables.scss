@@ -1,10 +1,28 @@
-@mixin size ($width: auto, $height: auto) {
+$transition-time: 1s;
+
+
+
+
+@mixin size($width: auto, $height: auto) {
   width: $width;
   height: $height;
 }
+
+@mixin circle($size) {
+  width: $size;
+  aspect-ratio: 1;
+  border-radius: 100%;
+}
+
 
 @mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin position ($position, $x, $xValue, $y, $yValue){
+  position: $position;
+  #{$x}: $xValue;
+  #{$y}: $yValue;
 }
