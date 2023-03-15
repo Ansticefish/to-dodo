@@ -1,7 +1,10 @@
 <template lang="pug">
 div.preview
   h1 {{ title }}
-  canvas(ref="canvas") 
+  canvas(
+    ref="canvas"
+    @click="toWorksDay"
+  ) 
 </template>
 
 <script>
@@ -27,6 +30,9 @@ export default {
     }
   },
   methods: {
+    toWorksDay( ) {
+      this.$router.push(`/works/${this.title}`)
+    },
     drawCanvas () {
       // init canvas
       const canvas = this.$refs.canvas
@@ -101,6 +107,7 @@ export default {
   }
   canvas {
     width: 100%;
+    @include divBtn;
   }
 }
 </style>

@@ -117,7 +117,7 @@ export default {
     flex-wrap: wrap;
     .day {
       width: 30%;
-      margin: 1vw;
+      margin: 1vw 1vh;
     }
   }
 }
