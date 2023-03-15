@@ -20,6 +20,13 @@
   // worksNav
   --nav-bg: #8DB9C3;
   --nav-color: #0D77A5;
+  --add-btn: url('@/assets/btn-add-light.png');
+  // worksDay
+  --day-bg: #A4D7ED;
+  --card-bg: #DAF4FF;
+  --edit-btn-color: #3D6C8D;
+  // input
+  --radio-color: #98C3C3;
 }
 
 
@@ -44,6 +51,13 @@ html[data-theme='dark'] {
   // worksNav
   --nav-bg: #4E5A5C;
   --nav-color: #DEECF2;
+  --add-btn: url('@/assets/btn-add.png');
+  // worksDay
+  --day-bg: #293235;
+  --card-bg: #293235;
+  --edit-btn-color: #CFE7F8;
+  // input
+  --radio-color: #DEDEDE;
 }
 
 

@@ -5,7 +5,7 @@ nav.worksNav
     div.egg.egg2
     div.egg.egg3
   h1 {{ this.$route.params.day? this.$route.params.day: 所有工作 }}
-  img.add(src="../assets/btn-add.png")
+  div.add-btn
 
 </template>
 
@@ -17,10 +17,11 @@ export default {
 
 <style lang="scss" scoped>
 .worksNav {
-  @include size (100%, 20px);
+  @include size (100%, 60px);
   @include flex (space-around, center);
   padding: 15px;
   background: var(--nav-bg);
+  box-sizing: border-box;
   .eggs {
     @include size (10%, 100%);
     @include flex(row, center, center);
@@ -43,9 +44,13 @@ export default {
     @include navFont;
     margin-left: -1%;
   }
-  img {
-    @include size ($height: 100%);
+  .add-btn {
+    @include size ($height: 80%);
+    aspect-ratio: 1;
     margin-left: auto;
+    background-image: var(--add-btn);
+    background-size: contain;
+    @include divBtn;
   }
 }
 </style>
