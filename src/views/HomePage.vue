@@ -9,18 +9,21 @@ div.home
       :todos="day"
       :switchTime="switchTime"
       )
+  EditPopup
 </template>
 
 
 <script>
 import WorkPreview from '../components/WorksPreview.vue'
+import EditPopup from '../components/EditPopup.vue'
 
 
 
 export default {
   name: 'HomePage',
   components: {
-    WorkPreview
+    WorkPreview,
+    EditPopup
   },
   props: {
     switchTime: {

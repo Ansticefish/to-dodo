@@ -47,6 +47,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	letter-spacing: 0.1rem;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

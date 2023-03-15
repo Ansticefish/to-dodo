@@ -137,6 +137,7 @@ export default {
       }
       .description {
         margin-top: 3%;
+        line-height: 1.5rem;
       }
       .status {
         @include flex (row, flex-start, center);
