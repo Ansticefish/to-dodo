@@ -1,11 +1,20 @@
 <template lang="pug">
 div.worksDay 
-  h1 This is WorksDay
+  h1 {{ todos }}
 </template>
 
 <script>
 export default {
-  name: 'WorksDay'
+  name: 'WorksDay',
+  data () {
+    return {
+      todos: {}
+    } 
+  },
+  beforeMount () {
+    const day = this.$route.params.day
+    this.todos = this.$store.state.data[day]
+  }
 }
 </script>
 
