@@ -1,118 +1,127 @@
 <template lang="pug">
 div.worksForm 
-  div.text
-    label(:for="textData.name") {{ textData.label }}
+  div.text(v-if="dataType === 'textData'")
+    label(:for="data.name") {{ data.label }}
     input(
       type="text"
-      :id="textData.name"
-      :name="textData.name"
-      :placeholder="textData.placeholder"
+      :id="data.name"
+      :name="data.name"
+      :placeholder="data.placeholder"
       )
-  div.textarea
-    label(:for="textareaData.name") {{ textareaData.label }}
+  div.textarea(v-if="dataType === 'textareaData'")
+    label(:for="data.name") {{ data.label }}
     textarea(
-      :id="textareaData.name"
-      :name="textareaData.name"
-      :placeholder="textareaData.placeholder"
+      :id="data.name"
+      :name="data.name"
+      :placeholder="data.placeholder"
       )
-  div.select
-    label(:for="selectData.name") {{ selectData.label }}
+  div.select(v-if="dataType === 'selectData'")
+    label(:for="data.name") {{ data.label }}
     select(
-      :id="selectData.name"
-      :name="selectData.name"
+      :id="data.name"
+      :name="data.name"
     )
       option(
         value="" 
       ) 未選擇
       option(
-        v-for="item in selectData.options"
+        v-for="item in data.options"
         :value="item.value"
       ) {{ item.option }}
-  div.radio
+  div.radio(v-if="dataType === 'radioData'")
     input( 
-      :id="radioData.name"
+      :id="data.name"
       type="radio" 
-      :name="radioData.name" 
-      :value="radioData.value"
+      :name="data.name" 
+      :value="data.value"
       )
-    label(:for="radioData.name") {{ radioData.label }}
+    label(:for="data.name") {{ data.label }}
 </template>
 
 <script>
-const textData = [
-  {
-    label: '名稱',
-    placeholder: '請輸入todo名稱',
-    name: 'title'
-  }
-]
-
-const textareaData = [
-  {
-    label: '內容',
-    placeholder: '請輸入todo內容',
-    name: 'description'
-  }
-]
-
-const selectData = [
-  {
-    label: '負責人',
-    options: [
-      { option: '小花', value: '小花' },
-      { option: '小梅', value: '小梅' },
-      { option: '小櫻', value: '小櫻' },
-    ],
-    name: 'person'
-  },
-  {
-    label: '時段',
-    options: [
-      {option:'7:00-8:00', value: '1' }, 
-      { option: '8:00-9:00', value: '2' },
-      { option: '9:00-10:00', value: '3' },
-      { option: '10:00-11:00', value: '4' },
-      { option: '11:00-12:00', value: '5' },
-      { option: '12:00-13:00', value: '6' },
-      { option: '13: 00 - 14: 00', value: '7' },
-      { option:  '14:00-15:00', value: '8' },
-      { option: '15:00-16:00', value: '9' },
-      { option: '16:00-17:00', value: '10' },
-      { option: '17:00-18:00', value: '11' },
-      { option: '18:00-19:00', value: '12' },
-      { option: '19:00-20:00', value: '13' },
-      { option: '20:00-21:00', value: '14' },
-      { option: '21:00-22:00', value: '15' } 
-    ],
-    values: [
-     '1', '2', '3', '4', '5' , '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'
-    ],
-    name: 'time'
-  }
-]
-
-const radioData = [
-  {
-    label: '未完成',
-    name: 'status1',
-    value: 'unfinished',
-  }
-]
-
-
 export default {
   name: 'WorksForm',
+  props: {
+    formData: {
+      type: Object
+    }
+  },
   data () {
     return {
-      textData: textData[0],
-      textareaData: textareaData[0],
-      selectData: selectData[0],
-      radioData: radioData[0]
+      dataType: '',
+      data: {}
     }
+  },
+  beforeMount () {
+    const dataType = this.formData.dataName
+    this.dataType = dataType
+    this.data = this.formData.data
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
+$margin: 15px;
+.worksForm {
+  @include size (100%, fit-content);
+  @include flex(column, center,center);
+  font-weight: 700;
+  div {
+    width: 100%;
+    margin-top: $margin;
+  }
+  label {
+    margin-right: $margin;
+  }
+  input, textarea {
+    padding: 5px;
+    background: var(--input-bg);
+    border: none;
+  }
+  ::placeholder {
+    color: var(--placeholder-color);
+  }
+  .text {
+    display: flex;
+    align-items: center;
+  }
+  .textarea {
+    label {
+      display: block;
+      margin-bottom: $margin;
+    }
+    textarea {
+      width: 100%;
+    }
+  }
+  .select {
+    @extend .text;
+    select, option {
+      width: fit-content;
+      background: var(--input-bg);
+      color: var(--placeholder-color);
+      border: none;
+      padding: 5px;
+    }
+  }
+  .radio {
+    @extend .text;
+    & input {
+      appearance: none;
+      @include circle (12px);
+      background: var(--radio-color);
+      margin: 0 3px;
+      &:checked {
+        @include circle (12px);
+        background: var(--radio-checked);
+        border: 2px solid var(--radio-color);
+      }
+    }
+    & label {
+      margin-left: 8px;
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+  }
+}
 </style>
