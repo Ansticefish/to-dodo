@@ -225,6 +225,12 @@ export default new Vuex.Store({
   mutations: {
     getData (state) {
       state.data = dummyData
+    },
+    addData(state, newData) {
+      state.data[newData.date][uuidv4()] = {
+        id: uuidv4(),
+        ...newData
+      }
     }
   },
   actions: {

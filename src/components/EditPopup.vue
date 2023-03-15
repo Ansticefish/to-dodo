@@ -3,15 +3,16 @@ div.filter
   div.edit
     form#todo(@submit.prevent="sendData")
       Form(
-        v-for="(data, index) in formData" :key="index" :form-data="data" @formChanged="submit"
+        v-for="(data, index) in formData" :key="index" :form-data="data" @formChanged="updateData"
         )
       div.btns
         button.cancel(
+          type="button"
           @click="() => this.$emit('togglePopup')") 取消
-        button.submit(
-          type="submit"      form="todo"   
+        button.submit( 
+          type="submit" 
+          form="todo"   
           value="Submit"
-          @click="() => this.$emit('togglePopup')"
           ) 新增
 </template>
 
@@ -60,27 +61,27 @@ export default {
             radio: [
               {
                 name: 'date1',
-                value: 'Mon.',
+                value: 'Monday',
                 label: '星期一'
               },
               {
                 name: 'date2',
-                value: 'Tue.',
+                value: 'Tuesday',
                 label: '星期二'
               },
               {
                 name: 'date3',
-                value: 'Wed.',
+                value: 'Wednesday',
                 label: '星期三'
               },
               {
                 name: 'date4',
-                value: 'Thu.',
+                value: 'Thursday',
                 label: '星期四'
               },
               {
                 name: 'date5',
-                value: 'Fri.',
+                value: 'Friday',
                 label: '星期五'
               }
             ],
@@ -150,12 +151,15 @@ export default {
     }
   },
   methods: {
-    submit (data) {
+    updateData (data) {
       this.newData[data.name] = data.data
     },
     sendData () {
       console.log(this.newData)
       // add data to frontend and backend
+      this.$store.commit('addData', this.newData)
+      // close the popup after the form is submitted
+      this.$emit('togglePopup')
     }
   }
 }
