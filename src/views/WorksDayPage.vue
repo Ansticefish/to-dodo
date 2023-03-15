@@ -2,7 +2,7 @@
 div.worksDay 
   WorksNav.nav
   div.container 
-    div.card(v-for="todo in todos" :key="todo.id")
+    div.card(v-for="todo in newTodos" :key="todo.id")
       header
         h1.title {{ todo.title }}
         h3.person by{{ todo.person }}
@@ -51,6 +51,40 @@ export default {
     updateTodo (id) {
       console.log(id)
       // send new data to backend
+    }
+  },
+  computed: {
+    newTodos () {
+      // sort todos based on time
+      const todoArr = Object.values(this.todos).sort((firstTodo, secondTodo) => 
+        firstTodo.time - secondTodo.time
+      )
+      // convert time to real time
+      const realTime = {
+        1 : '7:00-8:00',
+        2: '8:00-9:00',
+        3: '9:00-10:00',
+        4: '10:00-11:00',
+        5: '11:00-12:00',
+        6: '12:00-13:00',
+        7: '13:00-14:00',
+        8: '14:00-15:00',
+        9: '15:00-16:00',
+        10: '16:00-17:00',
+        11: '17:00-18:00',
+        12: '18:00-19:00',
+        13: '19:00-20:00',
+        14: '20:00-21:00',
+        15: '21:00-22:00'
+      }
+      const newTodo = todoArr.map(function(todo) { 
+        return {
+          ...todo,
+          time: realTime[todo.time]
+        } 
+      }
+      )
+      return newTodo
     }
   },
   beforeMount () {
@@ -110,7 +144,7 @@ export default {
             margin: 0 3px;
             &:checked {
               @include circle (12px);
-              background: var(--main-color);
+              background: var(--radio-checked);
               border: 2px solid var(--radio-color);
             }
           }
