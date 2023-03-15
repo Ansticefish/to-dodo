@@ -1,9 +1,9 @@
 <template lang="pug">
 div.filter
   div.edit
-    form#todo
+    form#todo(@submit.prevent="sendData")
       Form(
-        v-for="(data, index) in formData" :key="index" :form-data="data" 
+        v-for="(data, index) in formData" :key="index" :form-data="data" @formChanged="submit"
         )
       div.btns
         button.cancel 取消
@@ -49,6 +49,40 @@ export default {
           }
         },
         {
+          dataName: 'radioData',
+          data: {
+            title: '星期',
+            radio: [
+              {
+                name: 'date1',
+                value: 'Mon.',
+                label: '星期一'
+              },
+              {
+                name: 'date2',
+                value: 'Tue.',
+                label: '星期二'
+              },
+              {
+                name: 'date3',
+                value: 'Wed.',
+                label: '星期三'
+              },
+              {
+                name: 'date4',
+                value: 'Thu.',
+                label: '星期四'
+              },
+              {
+                name: 'date5',
+                value: 'Fri.',
+                label: '星期五'
+              }
+            ],
+            name: 'date'
+          }
+        },
+        {
           dataName: 'selectData',
           data: {
             label: '時段',
@@ -74,8 +108,49 @@ export default {
             ],
             name: 'time'
           }
-        }
-      ]
+        },
+        {
+          dataName: 'radioData',
+          data: {
+            title: '狀態',
+            radio: [
+              {
+                name: 'status1',
+                value: 'unfinished',
+                label: '未完成'
+              },
+              {
+                name: 'status2',
+                value: 'doing',
+                label: '進行中'
+              },
+              {
+                name: 'status3',
+                value: 'done',
+                label: '已完成'
+              }
+            ],
+            name: 'status'
+          }
+        },
+      ],
+      newData: {
+        title: '',
+        description: '',
+        person: '',
+        date: '',
+        time: '',
+        status: ''
+      }
+    }
+  },
+  methods: {
+    submit (data) {
+      this.newData[data.name] = data.data
+    },
+    sendData () {
+      console.log(this.newData)
+      // add data to frontend and backend
     }
   }
 }

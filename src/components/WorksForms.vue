@@ -1,5 +1,5 @@
 <template lang="pug">
-div.worksForm 
+div.worksForm
   div.text(v-if="dataType === 'textData'")
     label(:for="data.name") {{ data.label }}
     input(
@@ -7,6 +7,7 @@ div.worksForm
       :id="data.name"
       :name="data.name"
       :placeholder="data.placeholder"
+      v-model="newData"
       )
   div.textarea(v-if="dataType === 'textareaData'")
     label(:for="data.name") {{ data.label }}
@@ -14,12 +15,14 @@ div.worksForm
       :id="data.name"
       :name="data.name"
       :placeholder="data.placeholder"
+      v-model="newData"
       )
   div.select(v-if="dataType === 'selectData'")
     label(:for="data.name") {{ data.label }}
     select(
       :id="data.name"
       :name="data.name"
+      v-model="newData"
     )
       option(
         value="" 
@@ -29,13 +32,19 @@ div.worksForm
         :value="item.value"
       ) {{ item.option }}
   div.radio(v-if="dataType === 'radioData'")
-    input( 
-      :id="data.name"
-      type="radio" 
-      :name="data.name" 
-      :value="data.value"
-      )
-    label(:for="data.name") {{ data.label }}
+    h3.radio-title {{ data.title }}
+    div.wrapper
+      div.container(
+        v-for="(item, index) in data.radio" :key="index" :class="item.name"
+        )
+        input( 
+          :id="item.name"
+          type="radio" 
+          :name="data.name" 
+          :value="item.value"
+          v-model="newData"
+          )
+        label(:for="item.name") {{ item.label }}
 </template>
 
 <script>
@@ -49,7 +58,22 @@ export default {
   data () {
     return {
       dataType: '',
-      data: {}
+      data: {},
+      newData: ''
+    }
+  },
+  methods: {
+    sendData () {
+      const dataSent = {
+        name: this.data.name,
+        data: this.newData
+      }
+      this.$emit('formChanged', dataSent)
+    }
+  },
+  watch: {
+    newData () {
+      this.sendData()
     }
   },
   beforeMount () {
@@ -105,22 +129,33 @@ $margin: 15px;
     }
   }
   .radio {
-    @extend .text;
-    & input {
-      appearance: none;
-      @include circle (12px);
-      background: var(--radio-color);
-      margin: 0 3px;
-      &:checked {
-        @include circle (12px);
-        background: var(--radio-checked);
-        border: 2px solid var(--radio-color);
-      }
+    display: flex;
+    flex-wrap: wrap;
+    h3 {
+      width: fit-content;
     }
-    & label {
-      margin-left: 8px;
-      font-size: 0.8rem;
-      font-weight: normal;
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0;
+      .container {
+        width: fit-content;
+        & input {
+          appearance: none;
+          @include circle (12px);
+          background: var(--radio-color);
+          box-sizing: border-box;
+          &:checked {
+            background: var(--radio-checked);
+            border: 2px solid var(--radio-color);
+          }
+        }
+        & label {
+          margin-left: 6px;
+          font-size: 0.8rem;
+          font-weight: normal;
+        }
+      }
     }
   }
 }
