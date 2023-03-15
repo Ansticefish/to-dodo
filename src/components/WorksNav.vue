@@ -5,7 +5,7 @@ nav.worksNav
     div.egg.egg2
     div.egg.egg3
   h1 {{ this.$route.params.day? this.$route.params.day: 所有工作 }}
-  div.add-btn
+  div.add-btn(@click="() => this.$emit('togglePopup')")
 
 </template>
 

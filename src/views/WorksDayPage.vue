@@ -1,6 +1,6 @@
 <template lang="pug">
 div.worksDay 
-  WorksNav.nav
+  WorksNav.nav(@togglePopup="togglePopup")
   div.container 
     div.card(v-for="(todo, index) in newTodos" :key="todo.id")
       header
@@ -40,27 +40,37 @@ div.worksDay
           @click="updateTodo(todo.id)"
           )
           label(for="status3") 已完成
-      div.edit-btn
+      div.edit-btn(@click="togglePopup")
         div.circle(v-for="i in 3")
+  EditPopup(
+    v-if="showPopup"
+    @togglePopup="togglePopup"
+    )
 </template>
 
 <script>
 import WorksNav from '../components/WorksNav.vue'
+import EditPopup from '../components/EditPopup.vue'
 
 export default {
   name: 'WorksDay',
   components: {
-    WorksNav
+    WorksNav,
+    EditPopup
   },
   data () {
     return {
-      todos: {}
+      todos: {},
+      showPopup: false
     } 
   },
   methods: {
     updateTodo (id) {
       console.log(id)
       // send new data to backend
+    },
+    togglePopup() {
+      this.showPopup = !this.showPopup
     }
   },
   computed: {

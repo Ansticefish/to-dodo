@@ -6,8 +6,13 @@ div.filter
         v-for="(data, index) in formData" :key="index" :form-data="data" @formChanged="submit"
         )
       div.btns
-        button.cancel 取消
-        button.submit(type="submit" form="todo" value="Submit") 新增
+        button.cancel(
+          @click="() => this.$emit('togglePopup')") 取消
+        button.submit(
+          type="submit"      form="todo"   
+          value="Submit"
+          @click="() => this.$emit('togglePopup')"
+          ) 新增
 </template>
 
 <script>
