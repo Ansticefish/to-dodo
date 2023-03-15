@@ -54,12 +54,21 @@ export default {
 
       ctx.fillStyle = color
 
-      ctx.beginPath()
       for(let i = 1; i <= eggNumber; i++ ) {
-        ctx.arc(px*i + eggWidth*(i-1) + eggWidth/2, py*row + eggHeight*(row -1) + eggHeight/2, eggWidth, 0, 2*Math.PI)
+        const x = px * i * 1.1 + eggWidth * (i - 1) + eggWidth / 2
+        const y = py * row + eggHeight * (row - 1) + eggHeight / 2
+        const r = eggWidth * 1.2
+
+        // draw the left part of the circle
+        ctx.beginPath()
+        ctx.arc(x, y, r, Math.PI*0.6, Math.PI*1.4)
         ctx.fill()
+        // draw the right part of the circle
+        ctx.beginPath()
+        ctx.arc(x - px * 0.6, y, r, Math.PI * 1.6, Math.PI * 0.4)
+        ctx.fill()
+        ctx.closePath()
       }
-      ctx.closePath() 
     },
     getColor () {
       const r = document.querySelector('html')
@@ -73,6 +82,7 @@ export default {
   },
   watch: {
     switchTime() {
+      // update canvas when users switch to light/night mode
       console.log('preview', this.switchTime)
       this.drawCanvas()
     }
