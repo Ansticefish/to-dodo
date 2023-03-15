@@ -2,7 +2,7 @@
 div.worksDay 
   WorksNav.nav
   div.container 
-    div.card(v-for="todo in newTodos" :key="todo.id")
+    div.card(v-for="(todo, index) in newTodos" :key="todo.id")
       header
         h1.title {{ todo.title }}
         h3.person by{{ todo.person }}
@@ -10,26 +10,36 @@ div.worksDay
       p.description {{ todo.description }}
       div.status
         h3.status-title 狀態
-        div.doing
+        div.unfinished
           input( 
           id="status1"
           type="radio" 
-          name="status" 
+          :name="`status${index}`" 
+          value="unfinished"
+          v-model="todo.status"
+          @click="updateTodo(todo.id)"
+          )
+          label(for="status1") 未完成
+        div.doing
+          input( 
+          id="status2"
+          type="radio" 
+          :name="`status${index}`" 
           value="doing"
           v-model="todo.status"
           @click="updateTodo(todo.id)"
           )
-          label(for="status1") 進行中
+          label(for="status2") 進行中
         div.finished
           input( 
-          id="status2"
+          id="status3"
           type="radio" 
-          name="status" 
-          value="finished"
+          :name="`status${index}`" 
+          value="done"
           v-model="todo.status"
           @click="updateTodo(todo.id)"
           )
-          label(for="status2") 已完成
+          label(for="status3") 已完成
       div.edit-btn
         div.circle(v-for="i in 3")
 </template>
@@ -96,7 +106,8 @@ export default {
 
 <style lang="scss" scoped>
 .worksDay {
-  @include size (80vw, 100vh);
+  @include size (80vw, fit-content);
+  min-height: 100vh;
   background: var(--day-bg);
   margin: 0 auto;
   .container {
@@ -106,7 +117,7 @@ export default {
     padding: 15px;
     .card {
       position: relative;
-      @include size(100%, fit-content);
+      @include size(100%, 100%);
       background: var(--card-bg);
       padding: 5% 8%;
       border-radius: 33px;
@@ -133,7 +144,7 @@ export default {
         &-title {
           @include h3;
         }
-        .doing, .finished {
+        .unfinished, .doing, .finished {
           margin-left: 2%;
           font-size: 0.8rem;
           @include flex ($align: center);
