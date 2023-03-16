@@ -1,8 +1,8 @@
 <template lang="pug">
 div.worksDay 
   WorksNav.nav(@togglePopup="togglePopup")
-  div.container 
-    div.card(v-for="(todo, index) in newTodos" :key="todo.id")
+  div.container
+    div.card(v-for="(todo, index) in newTodos" :key="index")
       header
         h1.title {{ todo.title }}
         h3.person by{{ todo.person }}
@@ -17,7 +17,7 @@ div.worksDay
           :name="`status${index}`" 
           value="unfinished"
           v-model="todo.status"
-          @click="updateTodo(todo.id)"
+          @click="updateStatus(todo.id)"
           )
           label(for="status1") 未完成
         div.doing
@@ -27,7 +27,7 @@ div.worksDay
           :name="`status${index}`" 
           value="doing"
           v-model="todo.status"
-          @click="updateTodo(todo.id)"
+          @click="updateStatus(todo.id)"
           )
           label(for="status2") 進行中
         div.finished
@@ -37,7 +37,7 @@ div.worksDay
           :name="`status${index}`" 
           value="done"
           v-model="todo.status"
-          @click="updateTodo(todo.id)"
+          @click="updateStatus(todo.id)"
           )
           label(for="status3") 已完成
       div.edit-btn(@click="togglePopup")
@@ -61,11 +61,11 @@ export default {
   data () {
     return {
       todos: {},
-      showPopup: false
+      showPopup: false,
     } 
   },
   methods: {
-    updateTodo (id) {
+    updateStatus (id) {
       console.log(id)
       // send new data to backend
     },

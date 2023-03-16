@@ -25,6 +25,11 @@ export default {
           route: '/'
         },
         {
+          name: '團隊成員',
+          class: 'members',
+          route: '/members'
+        },
+        {
           name: '所有工作',
           class: 'works',
           route: '/works'
@@ -73,18 +78,11 @@ export default {
     @include size (90%, fit-content);
     margin-left: 15%;
     background: var(--sidebar-bg);
-    padding: 0 5px;
-    padding-bottom: 60%;
+    padding: 30% 0 60% 0;
+    border-radius: 15px;
     box-sizing: border-box;
-    &::before {
-      content: '';
-      @include position(absolute, top, -22%, left, 0);
-      @include circle(100%);
-      background: var(--sidebar-bg);
-      z-index: -1;
-    }
     .link {
-      @include size (fit-content, fit-content);
+      @include size (2.5rem, fit-content);
       margin: 25% auto;
       padding: 5px;
       border-bottom: 1px solid var(--sidebar-color);

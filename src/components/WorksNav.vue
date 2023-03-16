@@ -4,14 +4,19 @@ nav.worksNav
     div.egg.egg1
     div.egg.egg2
     div.egg.egg3
-  h1 {{ this.$route.params.day? this.$route.params.day: 所有工作 }}
+  h1 {{ this.$route.params.day? this.$route.params.day: title }}
   div.add-btn(@click="() => this.$emit('togglePopup')")
 
 </template>
 
 <script>
 export default {
-  name: 'WorksNav'
+  name: 'WorksNav',
+  props: {
+    title: {
+      type: String
+    }
+  }
 }
 </script>
 
