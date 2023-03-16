@@ -116,10 +116,7 @@ export default {
 
 <style lang="scss" scoped>
 .worksDay {
-  @include size (80vw, fit-content);
-  min-height: 100vh;
-  background: var(--day-bg);
-  margin: 0 auto;
+  @include componentsLayout;
   .container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

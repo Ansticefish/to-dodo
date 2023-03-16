@@ -37,6 +37,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.works {
+  @include componentsLayout
+}
 h1 {
   color: green;
 }
