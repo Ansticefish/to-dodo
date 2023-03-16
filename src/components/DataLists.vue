@@ -19,7 +19,12 @@ export default {
   },
   data () {
     return {
-      openList: false
+      openList: false,
+    }
+  },
+  watch: {
+    listData () {
+      console.log('get')
     }
   }
 }

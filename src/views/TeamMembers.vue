@@ -1,7 +1,7 @@
 <template lang="pug">
-div.members
+div.members 
   WorksNav(:title="'團隊成員'")
-  DataLists
+  DataLists(v-for="(item, index) in listData" :key="index" :list-data="item") 
 </template>
 
 <script>
@@ -13,6 +13,11 @@ export default{
   components: {
     WorksNav,
     DataLists
+  },
+  computed: {
+    listData () {
+      return this.$store.state.memberList
+    }
   }
 }
 </script>

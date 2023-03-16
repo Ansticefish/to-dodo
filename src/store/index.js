@@ -247,7 +247,6 @@ export default new Vuex.Store({
     async fetchMembers(state) {
       try {
         const response = await axios.get(' https://mocki.io/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8');
-        console.log(response);
         // change the form of the data
         const rawData = response.data
         state.commit('getMembers', rawData)
