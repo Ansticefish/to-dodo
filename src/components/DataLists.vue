@@ -1,16 +1,22 @@
 <template lang="pug">
 div.list(:class="{'clicked': openList}")
   div.header
-    h1 打掃房間
+    h1 {{ listData.title }}
     div.btn(:class="{'clicked': openList}" @click="() => this.openList = !this.openList"
       )
-  div.description(v-show="openList") rup wu0er ;lk;slrks;dlr
+  div.description(v-show="openList") {{ listData.description }}
 
 </template>
 
 <script>
 export default {
   name: 'DataList',
+  props: {
+    listData: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
       openList: false

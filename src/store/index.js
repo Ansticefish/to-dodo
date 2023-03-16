@@ -211,6 +211,7 @@ const dummyData = {
     }
   }
 }
+import axios from 'axios'
 
 
 
@@ -218,7 +219,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    data: {}
+    data: {},
+    memberList: []
   },
   getters: {
   },
@@ -231,9 +233,28 @@ export default new Vuex.Store({
         id: uuidv4(),
         ...newData
       }
+    },
+    getMembers(state, newData) {
+      state.memberList = newData.map(function (data) {
+        return {
+          title: data.name,
+          description: data.city
+        }
+      })
     }
   },
   actions: {
+    async fetchMembers(state) {
+      try {
+        const response = await axios.get(' https://mocki.io/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8');
+        console.log(response);
+        // change the form of the data
+        const rawData = response.data
+        state.commit('getMembers', rawData)
+      } catch (error) {
+        console.error(error);
+      }
+    }
   },
   modules: {
   }

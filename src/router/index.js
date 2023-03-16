@@ -19,7 +19,12 @@ const routes = [
     path: '/works/:day',
     name: 'day',
     component: () => import('../views/WorksDayPage.vue')
-  }
+  },
+  {
+    path: '/members',
+    name: 'members',
+    component: () => import('../views/TeamMembers.vue')
+  },
 ]
 
 const router = new VueRouter({

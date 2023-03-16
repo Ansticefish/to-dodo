@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 // import shared scss
 import "@/scss/theme.scss"
+import axios from 'axios'
 
 Vue.config.productionTip = false
 
@@ -13,5 +14,6 @@ Vue.prototype.$theme = 'light'
 new Vue({
   router,
   store,
+  axios,
   render: h => h(App)
 }).$mount('#app')

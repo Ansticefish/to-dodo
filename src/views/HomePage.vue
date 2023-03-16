@@ -39,6 +39,7 @@ export default {
   beforeMount () {
     this.$store.commit('getData')
     this.todos = this.$store.state.data
+    this.$store.dispatch('fetchMembers')
   }
 }
 
